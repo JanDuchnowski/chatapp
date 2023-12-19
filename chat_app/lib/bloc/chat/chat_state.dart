@@ -7,27 +7,28 @@ enum ChatStateStatus { initial, fetching, fetched, newMessageAdded ,messageDelet
     final List<String> messageHistory;
   final String answer;
   final ChatStateStatus status;
+  final List<Product> productList;
 
-  const ChatState({required this.messageHistory, required this.answer, required this.status});
+  const ChatState({required this.messageHistory, required this.answer, required this.status, required this.productList});
 
   ChatState.initial()
       : messageHistory = [],
-        answer = '', status = ChatStateStatus.initial;
+        answer = '', status = ChatStateStatus.initial,  productList = [];
 
   ChatState copyWith({
     List<String>? messageHistory,
     String? answer,
-    ChatStateStatus? status,
+    ChatStateStatus? status, List<Product>? productList
   }) {
     return ChatState(
       messageHistory: messageHistory ?? this.messageHistory,
       answer: answer ?? this.answer,
-      status: status ?? this.status,
+      status: status ?? this.status, productList: productList ?? this.productList
     );
   }
 
   @override
-  List<Object> get props => [messageHistory, answer, status];
+  List<Object> get props => [messageHistory, answer, status, productList];
 }
 
 

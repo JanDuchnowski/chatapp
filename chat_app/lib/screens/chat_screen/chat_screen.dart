@@ -1,6 +1,7 @@
 import 'package:chat_app/bloc/chat/chat_bloc.dart';
 import 'package:chat_app/constant_strings.dart';
 import 'package:chat_app/screens/chat_screen/widgets/chat_message.dart';
+import 'package:chat_app/screens/chat_screen/widgets/product_card.dart';
 import 'package:chat_app/utils/build_context_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,9 +32,22 @@ class ChatScreen extends StatelessWidget {
                 itemCount: state.messageHistory.length,
                 shrinkWrap: true,
               ),
+              if(state.messageHistory.isEmpty)
               const Text(ConstantStrings.WELCOME_USER),
               SizedBox(
                 height: ctxData.screenHeight * 0.02,
+              ),
+              if(state.messageHistory.isNotEmpty)
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return ProductRecommendationCard(
+                      product: state.productList[index],
+                    );
+                  },
+                  itemCount: state.productList.length,
+                           
+                ),
               ),
               Container(
                 decoration: BoxDecoration(
