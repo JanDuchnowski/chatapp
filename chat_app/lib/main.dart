@@ -4,14 +4,21 @@ import 'package:chat_app/bloc/chat/chat_bloc.dart';
 import 'package:chat_app/bloc/theme/theme_bloc.dart';
 import 'package:chat_app/interfaces/chat_interface.dart';
 import 'package:chat_app/repositories/chat_repository.dart';
-import 'package:chat_app/screens/chat_screen/chat_screen.dart';
+import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
+import 'package:chat_app/views/screens/favorites/favorites_screen.dart';
+import 'package:chat_app/views/screens/history/history_screen.dart';
+import 'package:chat_app/views/screens/home_screen.dart';
+import 'package:chat_app/views/widget/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/navigation/navigation_bloc.dart';
 
 void main() {
   final ChatInterface chatInterface = ChatRepository();
   runApp(MultiBlocProvider(
     providers: [
+      BlocProvider(create: (context) => NavigationBloc()),
       BlocProvider(
         create: (context) => ChatBloc(chatInterface: chatInterface),
       ),
@@ -20,7 +27,7 @@ void main() {
       ),
       BlocProvider(create: (context) => ThemeBloc()),
     ],
-    child: ChatGPTPage(),
+    child: const ChatGPTPage(),
     
   ),
   );
@@ -35,7 +42,8 @@ class ChatGPTPage extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       home: Scaffold(      
-        body: ChatScreen(),
+        body: HomeScreen(),
+
       ),
     );
   }

@@ -22,10 +22,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     final String answer = response['recommendation'];
          print("got here");
       
-      // Use the productList as needed
-      
-    // END: abpxx6d04wxr
-
   
     final List<String> messageHistory = state.messageHistory + [event.message];
     emit(state.copyWith(messageHistory: messageHistory, answer:answer, status: ChatStateStatus.fetched, productList: productList));
