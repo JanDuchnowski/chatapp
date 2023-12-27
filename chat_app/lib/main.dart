@@ -4,11 +4,7 @@ import 'package:chat_app/bloc/chat/chat_bloc.dart';
 import 'package:chat_app/bloc/theme/theme_bloc.dart';
 import 'package:chat_app/interfaces/chat_interface.dart';
 import 'package:chat_app/repositories/chat_repository.dart';
-import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
-import 'package:chat_app/views/screens/favorites/favorites_screen.dart';
-import 'package:chat_app/views/screens/history/history_screen.dart';
 import 'package:chat_app/views/screens/home_screen.dart';
-import 'package:chat_app/views/widget/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

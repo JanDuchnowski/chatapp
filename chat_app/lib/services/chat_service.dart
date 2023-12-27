@@ -1,13 +1,14 @@
 class ChatService{ 
 
-  Map<String, dynamic> fetchChatResponse(String text) {
-    Future.delayed(const Duration(milliseconds: 200), () => null);
+ Future <Map<String, dynamic>> fetchChatResponse(String text) async  {
+
+   await Future.delayed(const Duration(milliseconds: 1000));
     //response should have a message describing some of the products also making some suggestions
     // 4 product photo links plus some information about the product
-    Map<String, dynamic> response = {
-      'isSentByUser': false,
+        Map<String, dynamic> response = {
+
       'products': products,
-      'recommendation': 'Based on your query, we recommend product2. It is best suited for Category 2 and priced at \$19.99.',
+      'recommendation': 'Based on your query, I recommend product4. It is best suited for Category 3 and priced at \$12.99. It has also been a bestseller in its catgory for over 4 months.',
     };
     return response;
   }

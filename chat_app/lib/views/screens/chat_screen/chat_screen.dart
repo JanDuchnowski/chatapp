@@ -41,7 +41,7 @@ class ChatScreen extends StatelessWidget {
                           shrinkWrap: true,
                         ),
                         if(state.messageHistory.isNotEmpty)
-                       Container(decoration: BoxDecoration(        color: Theme.of(context).cardColor, borderRadius: BorderRadius.circular(10)), child: Text(state.answer),),
+                       Container(padding: const EdgeInsets.all(8),width: double.maxFinite,decoration: BoxDecoration(        color: Theme.of(context).cardColor, borderRadius: BorderRadius.circular(5)), child: Text(state.answer, style: const TextStyle(fontSize: 16),),),
                         if(state.messageHistory.isEmpty)
                         const Text(ConstantStrings.WELCOME_USER),
                         SizedBox(
@@ -49,12 +49,13 @@ class ChatScreen extends StatelessWidget {
                         ),
                         if(state.messageHistory.isNotEmpty)
                         GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            childAspectRatio: 1.5,
+                            childAspectRatio: 3,
                             crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            mainAxisSpacing: 1,
+                            mainAxisExtent: 200,
                           ),
                           itemBuilder: (context, index) {
                             return ProductRecommendationCard(
