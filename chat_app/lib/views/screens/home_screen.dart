@@ -35,8 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<NavigationBloc>().add(NavigationEvent(index: index));
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationBloc, NavigationState>(
@@ -49,8 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: CustomNavigationBar(
-                  currentlySelected: state.selectedIndex,
-                  onTap: onItemTapped),
+                  currentlySelected: state.selectedIndex, onTap: onItemTapped),
             )
           ],
         );
