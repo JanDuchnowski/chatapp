@@ -30,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
     4: GlobalKey<NavigatorState>(),
   };
   final List<Widget> _widgetOptions = <Widget>[
-    DashboardScreen(),
+    const DashboardScreen(),
     HistoryScreen(),
     ChatScreen(),
-    FavoritesScreen(),
-    AccountScreen(),
+    const FavoritesScreen(),
+    const AccountScreen(),
   ];
 
   void onItemTapped(int index) {
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Stack(
           children: [
             SizedBox(
-              height: ctxData.screenHeight - 100,
+              height: ctxData.screenHeight, // - 100,
               child: buildNavigator(state.selectedIndex),
             ),
             Align(

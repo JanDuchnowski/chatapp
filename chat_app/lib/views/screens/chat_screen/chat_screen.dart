@@ -40,33 +40,41 @@ class _ChatScreenState extends State<ChatScreen> {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
-              toolbarHeight: kIsWeb ? 120 : null,
-              title: Padding(
-                padding: EdgeInsets.all(16),
-                child: RangeSlider(
-                  activeColor: Colors.black,
-                  divisions: 10,
-                  values: RangeValues(_minRangeValue, _maxRangeValue),
-                  onChanged: (value) {
-                    setState(() {
-                      _minRangeValue = value.start;
-                      _maxRangeValue = value.end;
-                    });
-                  },
-                  min: 0,
-                  max: 100,
-                  labels: RangeLabels(
-                    _minRangeValue.toString(),
-                    _maxRangeValue.toString(),
+              foregroundColor: Colors.transparent,
+              toolbarOpacity: 0.0,
+              bottomOpacity: 0.0,
+              toolbarHeight: kIsWeb ? 120 : 90,
+              flexibleSpace: Container(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: Colors.white,
+                  child: RangeSlider(
+                    activeColor: Colors.black,
+                    divisions: 10,
+                    values: RangeValues(_minRangeValue, _maxRangeValue),
+                    onChanged: (value) {
+                      setState(() {
+                        _minRangeValue = value.start;
+                        _maxRangeValue = value.end;
+                      });
+                    },
+                    min: 0,
+                    max: 100,
+                    labels: RangeLabels(
+                      _minRangeValue.toString(),
+                      _maxRangeValue.toString(),
+                    ),
                   ),
                 ),
               ),
             ),
             bottomNavigationBar: state.messageHistory.isNotEmpty
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.only(
+                        left: 8.0, right: 8, bottom: kIsWeb ? 110 : 70),
                     child: TextPrompt(textController: textController),
                   )
                 : null,
