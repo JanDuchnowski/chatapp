@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chat_app/bloc/chat/chat_bloc.dart';
 import 'package:chat_app/constant_strings.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/chat_message.dart';
@@ -17,151 +18,148 @@ class ChatScreen extends StatelessWidget {
     final BuildContextData ctxData = BuildContextData(context);
     return BlocConsumer<ChatBloc, ChatState>(
       listener: (context, state) {
-        if (state.status == ChatStateStatus.fetched) {
-          // _scrollController.animateTo(
-          //   _scrollController.position.maxScrollExtent,
-          //   duration: const Duration(milliseconds: 15),
-          //   curve: Curves.easeOut,
-          // );
-        }
+        if (state.status == ChatStateStatus.fetched) {}
       },
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: ctxData.screenHeight,
-            child: Column(
-              mainAxisAlignment: state.messageHistory.isEmpty
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: state.messageHistory.isNotEmpty
-                      ? ctxData.screenHeight - 115
-                      : null,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        if (state.messageHistory.isNotEmpty)
-                          ListView.separated(
-                            //    controller: _scrollController,
-                            padding: const EdgeInsets.only(bottom: 8),
-                            separatorBuilder: (context, _) => const SizedBox(
-                              height: 0,
-                            ),
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return ChatMessage(
-                                text: state.messageHistory[index],
-                                index: index,
-                              );
-                            },
-                            itemCount: state.messageHistory.length,
-                            shrinkWrap: true,
-                          ),
-                        if (state.status == ChatStateStatus.fetched)
-                          Column(
-                            children: [
-                              if (state.messageHistory.isNotEmpty)
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  width: double.maxFinite,
-                                  decoration: BoxDecoration(
-                                      color: Theme.of(context).cardTheme.color,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Text(
-                                    state.answer,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              if (state.messageHistory.isEmpty)
-                                const Text(ConstantStrings.WELCOME_USER),
-                              SizedBox(
-                                height: ctxData.screenHeight * 0.02,
+        return Scaffold(
+          bottomNavigationBar: state.messageHistory.isNotEmpty
+              ? TextPrompt(textController: textController)
+              : null,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: state.messageHistory.isEmpty
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          if (state.messageHistory.isNotEmpty)
+                            ListView.separated(
+                              //    controller: _scrollController,
+                              padding: const EdgeInsets.only(bottom: 8),
+                              separatorBuilder: (context, _) => const SizedBox(
+                                height: 0,
                               ),
-                              if (state.messageHistory.isNotEmpty)
-                                LayoutBuilder(builder: (context, constraints) {
-                                  if (MediaQuery.of(context).size.width < 600) {
-                                    return Expanded(
-                                      child: ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        itemBuilder: (context, index) {
-                                          return ProductRecommendationCard(
-                                            product: state.productList[index],
-                                          );
-                                        },
-                                        itemCount: state.productList.length,
-                                        //
-                                        //   shrinkWrap: true,
-                                      ),
-                                    );
-                                  } else {
-                                    return Expanded(
-                                      child: GridView.builder(
-                                        padding: EdgeInsets.zero,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 3,
-                                          childAspectRatio: 3,
-                                          crossAxisSpacing: 10,
-                                          mainAxisSpacing: 1,
-                                          mainAxisExtent: 200,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return ChatMessage(
+                                  text: state.messageHistory[index],
+                                  index: index,
+                                );
+                              },
+                              itemCount: state.messageHistory.length,
+                              shrinkWrap: true,
+                            ),
+                          if (state.status == ChatStateStatus.fetched)
+                            Column(
+                              children: [
+                                if (state.messageHistory.isNotEmpty)
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    width: double.maxFinite,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).cardTheme.color,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: AnimatedTextKit(
+                                      pause: const Duration(milliseconds: 500),
+                                      isRepeatingAnimation: false,
+                                      animatedTexts: [
+                                        TyperAnimatedText(state.answer,
+                                            textStyle:
+                                                const TextStyle(fontSize: 16))
+                                      ],
+                                    ),
+                                  ),
+                                if (state.messageHistory.isEmpty)
+                                  const Text(ConstantStrings.WELCOME_USER),
+                                SizedBox(
+                                  height: ctxData.screenHeight * 0.02,
+                                ),
+                                if (state.messageHistory.isNotEmpty)
+                                  LayoutBuilder(
+                                      builder: (context, constraints) {
+                                    if (MediaQuery.of(context).size.width <
+                                        600) {
+                                      return Expanded(
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          padding: EdgeInsets.zero,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            return ProductRecommendationCard(
+                                              product: state.productList[index],
+                                            );
+                                          },
+                                          itemCount: state.productList.length,
+                                          //
+                                          //   shrinkWrap: true,
                                         ),
-                                        itemBuilder: (context, index) {
-                                          return ProductRecommendationCard(
-                                            product: state.productList[index],
-                                          );
-                                        },
-                                        itemCount: state.productList.length,
-                                        shrinkWrap: true,
-                                      ),
-                                    );
-                                  }
-                                }),
-                            ],
+                                      );
+                                    } else {
+                                      return Expanded(
+                                        child: GridView.builder(
+                                          padding: EdgeInsets.zero,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 3,
+                                            childAspectRatio: 3,
+                                            crossAxisSpacing: 10,
+                                            mainAxisSpacing: 1,
+                                            mainAxisExtent: 200,
+                                          ),
+                                          itemBuilder: (context, index) {
+                                            return ProductRecommendationCard(
+                                              product: state.productList[index],
+                                            );
+                                          },
+                                          itemCount: state.productList.length,
+                                          shrinkWrap: true,
+                                        ),
+                                      );
+                                    }
+                                  }),
+                              ],
+                            ),
+                          if (state.status == ChatStateStatus.fetching)
+                            const Center(child: CircularProgressIndicator())
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (state.messageHistory.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Column(
+                        children: [
+                          const Text(
+                            ConstantStrings.appTitle,
+                            style: TextStyle(
+                              fontFamily: 'Jockey One',
+                              fontSize: 64,
+                              fontWeight: FontWeight.w400,
+                              height: 89 / 64,
+                              letterSpacing: 0,
+                            ),
                           ),
-                        if (state.status == ChatStateStatus.fetching)
-                          const Center(child: CircularProgressIndicator())
-                      ],
-                    ),
-                  ),
-                ),
-                if (state.messageHistory.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 0.0),
-                    child: TextPrompt(
-                      textController: textController,
-                    ),
-                  ),
-                if (state.messageHistory.isEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Column(
-                      children: [
-                        const Text(
-                          ConstantStrings.appTitle,
-                          style: TextStyle(
-                            fontFamily: 'Jockey One',
-                            fontSize: 64,
-                            fontWeight: FontWeight.w400,
-                            height: 89 / 64,
-                            letterSpacing: 0,
-                            //  textAlign: TextAlign.center,
+                          TextPrompt(
+                            textController: textController,
                           ),
-                        ),
-                        TextPrompt(
-                          textController: textController,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
         );

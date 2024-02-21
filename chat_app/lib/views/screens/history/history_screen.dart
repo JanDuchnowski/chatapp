@@ -5,56 +5,54 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Search History')),
+        appBar: AppBar(title: const Text('Search History')),
         body: ListView(
           children: [
-            ListTile(
-              title: Text('Motor for traveling'),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.favorite),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+            buildCard(
+              'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
+              'Motor for traveling',
+              'Powerful motor for long-distance travel',
             ),
-            ListTile(
-              title: Text('Snowboard for beginners'),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.favorite),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+            buildCard(
+              'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
+              'Snowboard for beginners',
+              'Perfect for learning snowboarding',
             ),
-            ListTile(
-              title: Text('Snowboard for beginners'),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.favorite),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {},
-                  ),
-                ],
+            buildCard(
+              'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
+              'Snowboard for beginners',
+              'Perfect for learning snowboarding',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildCard(
+    String imageUrl,
+    String title,
+    String subtitle,
+  ) {
+    return Card(
+      child: ListTile(
+        leading: Image.network(imageUrl),
+        title: Text(title),
+        subtitle: Text(subtitle),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.favorite,
               ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.ios_share,
+              ),
+              onPressed: () {},
             ),
           ],
         ),

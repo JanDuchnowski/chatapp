@@ -18,26 +18,48 @@ class ProductRecommendationCard extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.all(8),
-      height: 200,
+      height: 180,
       width: 100,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (product.bestFor == "Category 3" ||
-              product.description == "Product 5 description")
-            Text(
-              product.bestFor == "Category 3"
-                  ? "Best seller"
-                  : product.description == "Product 5 description"
-                      ? "Best price"
-                      : "",
-              style: TextStyle(
-                  color: product.bestFor == "Category 3"
-                      ? Colors.redAccent
-                      : Colors.greenAccent,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Spacer(
+                flex: 2,
+              ),
+              if (product.bestFor == "Category 3" ||
+                  product.description == "Product 5 description")
+                Text(
+                  product.bestFor == "Category 3"
+                      ? "Best seller"
+                      : product.description == "Product 5 description"
+                          ? "Best price"
+                          : "",
+                  style: TextStyle(
+                      color: product.bestFor == "Category 3"
+                          ? Colors.redAccent
+                          : Colors.greenAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {},
+                child: const Icon(Icons.favorite),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: const Icon(
+                  Icons.ios_share,
+                ),
+              )
+            ],
+          ),
           Expanded(
             child: Container(
               height: 150,

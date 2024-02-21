@@ -1,4 +1,5 @@
 import 'package:chat_app/bloc/navigation/navigation_bloc.dart';
+import 'package:chat_app/utils/build_context_data.dart';
 import 'package:chat_app/views/screens/account/account_screen.dart';
 import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
 import 'package:chat_app/views/screens/dashboard/dashboard.dart';
@@ -42,18 +43,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final BuildContextData ctxData = BuildContextData(context);
     return BlocBuilder<NavigationBloc, NavigationState>(
       builder: (context, state) {
         return Stack(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height,
+              height: ctxData.screenHeight - 100,
               child: buildNavigator(state.selectedIndex),
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: CustomNavigationBar(
-                  currentlySelected: state.selectedIndex, onTap: onItemTapped),
+              child: SizedBox(
+                height: 100,
+                child: CustomNavigationBar(
+                    currentlySelected: state.selectedIndex,
+                    onTap: onItemTapped),
+              ),
             )
           ],
         );
