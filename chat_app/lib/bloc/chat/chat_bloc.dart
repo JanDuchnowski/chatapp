@@ -28,22 +28,43 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         final String answer = response['recommendation'];
 
         emit(state.copyWith(
-            messageHistory: messageHistory,
-            answer: answer,
-            status: ChatStateStatus.fetched,
-            productList: productList));
+          messageHistory: messageHistory,
+          answer: answer,
+          status: ChatStateStatus.fetched,
+          productList: productList,
+        ));
       },
     );
 
     on<DeleteMessageEvent>(
-      (event, emit) {
+      (event, emit) async {
         final List<String> messageHistory = state.messageHistory;
         final List<String> szyc = List.from(messageHistory)
           ..removeAt(event.index);
+
+        emit(state.copyWith(
+          messageHistory: szyc,
+          status: ChatStateStatus.fetching,
+        ));
+
+//Take all the messages and send them to ai interface
+
+        final Map<String, dynamic> response =
+            await chatInterface.handleNewMessage(szyc.join(' '));
+
+        final List<Product> productList = [];
+        for (var element
+            in (response['products'] as Map<String, dynamic>).values) {
+          print(element);
+          productList.add(Product.fromJson(element));
+        }
+        final String answer = response['recommendation'];
+
         emit(state.copyWith(
             messageHistory: szyc,
-            answer: 'answer',
-            status: ChatStateStatus.messageDeleted));
+            answer: answer,
+            status: ChatStateStatus.fetched,
+            productList: productList));
       },
     );
   }

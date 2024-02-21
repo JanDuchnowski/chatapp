@@ -22,31 +22,51 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     final BuildContextData ctxData = BuildContextData(context);
 
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 200,
+            spreadRadius: 20,
+          )
+        ],
       ),
       child: BottomNavigationBar(
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: Colors.white,
         onTap: (int index) {
           widget.onTap(index);
         },
         type: BottomNavigationBarType.fixed,
         elevation: 0,
-    
         unselectedItemColor: const Color.fromRGBO(144, 144, 145, 1),
         currentIndex: widget.currentlySelected,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
+            icon: Icon(
+              Icons.home,
+              color: Colors.black,
+            ),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
+            icon: Icon(Icons.history, color: Colors.black),
             label: 'History',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.search, color: Colors.black),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite, color: Colors.black),
             label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+              color: Colors.black,
+            ),
+            label: 'Account',
           ),
         ],
       ),

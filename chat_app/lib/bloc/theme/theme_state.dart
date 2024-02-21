@@ -1,6 +1,18 @@
 part of 'theme_bloc.dart';
 
-@immutable
-sealed class ThemeState {}
+class ThemeState extends Equatable {
+  const ThemeState(this.theme);
 
-final class ThemeInitial extends ThemeState {}
+  final ThemeData theme;
+
+  @override
+  List<Object> get props => [];
+}
+
+class DarkThemeState extends ThemeState {
+  const DarkThemeState(super.theme);
+}
+
+class LightThemeState extends ThemeState {
+  const LightThemeState(super.theme);
+}

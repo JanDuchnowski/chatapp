@@ -12,22 +12,22 @@ import 'bloc/navigation/navigation_bloc.dart';
 
 void main() {
   final ChatInterface chatInterface = ChatRepository();
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(create: (context) => NavigationBloc()),
-      BlocProvider(
-        create: (context) => ChatBloc(chatInterface: chatInterface),
-      ),
-      BlocProvider(
-        create: (context) => AuthenticationBloc(),
-      ),
-      BlocProvider(create: (context) => ThemeBloc()),
-    ],
-    child: const ChatGPTPage(),
-    
-  ),
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => NavigationBloc()),
+        BlocProvider(
+          create: (context) => ChatBloc(chatInterface: chatInterface),
+        ),
+        BlocProvider(
+          create: (context) => AuthenticationBloc(),
+        ),
+        BlocProvider(create: (context) => ThemeBloc()..add(CheckThemeEvent())),
+      ],
+      child: const ChatGPTPage(),
+    ),
   );
-    Bloc.observer = AppBlocObserver();
+  Bloc.observer = AppBlocObserver();
 }
 
 class ChatGPTPage extends StatelessWidget {
@@ -35,12 +35,15 @@ class ChatGPTPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      home: Scaffold(      
-        body: HomeScreen(),
-
-      ),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
+          theme: state.theme,
+          home: Scaffold(
+            body: HomeScreen(),
+          ),
+        );
+      },
     );
   }
 }
@@ -51,4 +54,4 @@ class ChatGPTPage extends StatelessWidget {
 
 // ListView z poprzednimi wiadomościami na górze
 // SizedBox
-// Szybki opis + 5 wyników
+// Szybki opis + 5 wyników 

@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChatMessage extends StatefulWidget {
   String text;
   final int index;
-  ChatMessage({Key? key, required this.text, required  this.index}) : super(key: key);
+  ChatMessage({Key? key, required this.text, required this.index})
+      : super(key: key);
 
   @override
   _ChatMessageState createState() => _ChatMessageState();
@@ -39,7 +40,7 @@ class _ChatMessageState extends State<ChatMessage> {
     setState(() {
       isEditing = false;
       widget.text = _textController.text;
-      if(_textController.text.isEmpty) {
+      if (_textController.text.isEmpty) {
         context.read<ChatBloc>().add(DeleteMessageEvent(index: widget.index));
       }
     });
@@ -48,10 +49,10 @@ class _ChatMessageState extends State<ChatMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).cardTheme.color,
         borderRadius: BorderRadius.circular(7),
         border: Border.all(color: Theme.of(context).canvasColor),
       ),
@@ -77,7 +78,7 @@ class _ChatMessageState extends State<ChatMessage> {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () {
               if (isEditing) {
                 saveChanges();
@@ -87,15 +88,16 @@ class _ChatMessageState extends State<ChatMessage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () {
-    
-              context.read<ChatBloc>().add(DeleteMessageEvent(index: widget.index));
+              context
+                  .read<ChatBloc>()
+                  .add(DeleteMessageEvent(index: widget.index));
             },
           ),
           if (isEditing)
             IconButton(
-              icon: Icon(Icons.cancel),
+              icon: const Icon(Icons.cancel),
               onPressed: cancelEditing,
             ),
         ],

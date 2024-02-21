@@ -1,5 +1,7 @@
 import 'package:chat_app/bloc/navigation/navigation_bloc.dart';
+import 'package:chat_app/views/screens/account/account_screen.dart';
 import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
+import 'package:chat_app/views/screens/dashboard/dashboard.dart';
 import 'package:chat_app/views/screens/favorites/favorites_screen.dart';
 import 'package:chat_app/views/screens/history/history_screen.dart';
 import 'package:chat_app/views/widget/custom_navigation_bar.dart';
@@ -24,11 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
     1: GlobalKey<NavigatorState>(),
     2: GlobalKey<NavigatorState>(),
     3: GlobalKey<NavigatorState>(),
+    4: GlobalKey<NavigatorState>(),
   };
   final List<Widget> _widgetOptions = <Widget>[
-    ChatScreen(),
+    DashboardScreen(),
     HistoryScreen(),
-    FavoritesScreen(),
+    ChatScreen(),
+    const FavoritesScreen(),
+    AccountScreen(),
   ];
 
   void onItemTapped(int index) {
@@ -41,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         return Stack(
           children: [
-            Container(
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
               child: buildNavigator(state.selectedIndex),
             ),
             Align(
@@ -57,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   buildNavigator(int index) {
     return Navigator(
-      key: (index == 2 || index == 3) ? navigatorKeys[2] : navigatorKeys[index],
+      key: navigatorKeys[index],
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
             builder: (_) => _widgetOptions.elementAt(index));

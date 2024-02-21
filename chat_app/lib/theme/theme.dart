@@ -61,6 +61,13 @@ class AppTheme {
     ),
   );
   static final lightTheme = AppTheme.darkTheme.copyWith(
+    cardTheme: CardTheme(
+      color: const Color.fromRGBO(242, 242, 242, 1),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
     scaffoldBackgroundColor: Colors.white,
     colorScheme: ColorScheme(
       primary: const Color(0xFF97E14A),

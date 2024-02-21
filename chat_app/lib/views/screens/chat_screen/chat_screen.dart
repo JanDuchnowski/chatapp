@@ -3,11 +3,12 @@ import 'package:chat_app/constant_strings.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/chat_message.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/product_card.dart';
 import 'package:chat_app/utils/build_context_data.dart';
+import 'package:chat_app/views/screens/chat_screen/widgets/text_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatScreen extends StatelessWidget {
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController textController = TextEditingController();
 
   ChatScreen({super.key});
   final ScrollController _scrollController = ScrollController();
@@ -17,7 +18,6 @@ class ChatScreen extends StatelessWidget {
     return BlocConsumer<ChatBloc, ChatState>(
       listener: (context, state) {
         if (state.status == ChatStateStatus.fetched) {
-          print("triggered");
           _scrollController.animateTo(
             _scrollController.position.maxScrollExtent,
             duration: const Duration(milliseconds: 150),
@@ -26,16 +26,18 @@ class ChatScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 64.0),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: ctxData.screenHeight,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: state.messageHistory.isEmpty
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: state.messageHistory.isNotEmpty
-                      ? ctxData.screenHeight * 0.85
+                      ? ctxData.screenHeight - 115
                       : null,
                   child: SingleChildScrollView(
                     controller: _scrollController,
@@ -43,7 +45,11 @@ class ChatScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         if (state.messageHistory.isNotEmpty)
-                          ListView.builder(
+                          ListView.separated(
+                            padding: EdgeInsets.only(bottom: 8),
+                            separatorBuilder: (context, _) => const SizedBox(
+                              height: 0,
+                            ),
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return ChatMessage(
@@ -62,7 +68,7 @@ class ChatScreen extends StatelessWidget {
                                   padding: const EdgeInsets.all(8),
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
-                                      color: Theme.of(context).cardColor,
+                                      color: Theme.of(context).cardTheme.color,
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Text(
                                     state.answer,
@@ -75,24 +81,48 @@ class ChatScreen extends StatelessWidget {
                                 height: ctxData.screenHeight * 0.02,
                               ),
                               if (state.messageHistory.isNotEmpty)
-                                GridView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    childAspectRatio: 3,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 1,
-                                    mainAxisExtent: 200,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    return ProductRecommendationCard(
-                                      product: state.productList[index],
+                                LayoutBuilder(builder: (context, constraints) {
+                                  if (MediaQuery.of(context).size.width < 600) {
+                                    return Expanded(
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return ProductRecommendationCard(
+                                            product: state.productList[index],
+                                          );
+                                        },
+                                        itemCount: state.productList.length,
+                                        //
+                                        //   shrinkWrap: true,
+                                      ),
                                     );
-                                  },
-                                  itemCount: state.productList.length,
-                                  shrinkWrap: true,
-                                ),
+                                  } else {
+                                    return Expanded(
+                                      child: GridView.builder(
+                                        padding: EdgeInsets.zero,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: 3,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 1,
+                                          mainAxisExtent: 200,
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          return ProductRecommendationCard(
+                                            product: state.productList[index],
+                                          );
+                                        },
+                                        itemCount: state.productList.length,
+                                        shrinkWrap: true,
+                                      ),
+                                    );
+                                  }
+                                }),
                             ],
                           ),
                         if (state.status == ChatStateStatus.fetching)
@@ -101,56 +131,40 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(10),
+                if (state.messageHistory.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 0.0),
+                    child: TextPrompt(
+                      textController: textController,
                     ),
-                    child: _buildTextComposer(context),
                   ),
-                ),
-                ctxData.vSpaceLarge,
-                ctxData.vSpaceLarge,
+                if (state.messageHistory.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          ConstantStrings.appTitle,
+                          style: TextStyle(
+                            fontFamily: 'Jockey One',
+                            fontSize: 64,
+                            fontWeight: FontWeight.w400,
+                            height: 89 / 64,
+                            letterSpacing: 0,
+                            //  textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TextPrompt(
+                          textController: textController,
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
         );
       },
-    );
-  }
-
-  Widget _buildTextComposer(BuildContext context) {
-    return IconTheme(
-      data: IconThemeData(color: Theme.of(context).canvasColor),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          children: <Widget>[
-            Flexible(
-              child: TextField(
-                controller: _textController,
-                onSubmitted: (text) {},
-                decoration: const InputDecoration.collapsed(
-                  hintText: 'Type a message',
-                ),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: () {
-                if (_textController.text.isEmpty) return;
-                context
-                    .read<ChatBloc>()
-                    .add(NewMessageEvent(message: _textController.text));
-
-                _textController.clear();
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
