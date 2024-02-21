@@ -18,11 +18,11 @@ class ChatScreen extends StatelessWidget {
     return BlocConsumer<ChatBloc, ChatState>(
       listener: (context, state) {
         if (state.status == ChatStateStatus.fetched) {
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 150),
-            curve: Curves.easeOut,
-          );
+          // _scrollController.animateTo(
+          //   _scrollController.position.maxScrollExtent,
+          //   duration: const Duration(milliseconds: 15),
+          //   curve: Curves.easeOut,
+          // );
         }
       },
       builder: (context, state) {
@@ -46,7 +46,8 @@ class ChatScreen extends StatelessWidget {
                       children: <Widget>[
                         if (state.messageHistory.isNotEmpty)
                           ListView.separated(
-                            padding: EdgeInsets.only(bottom: 8),
+                            //    controller: _scrollController,
+                            padding: const EdgeInsets.only(bottom: 8),
                             separatorBuilder: (context, _) => const SizedBox(
                               height: 0,
                             ),
@@ -143,7 +144,7 @@ class ChatScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           ConstantStrings.appTitle,
                           style: TextStyle(
                             fontFamily: 'Jockey One',
