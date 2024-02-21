@@ -10,30 +10,26 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          body: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('Hello User!', style: TextStyle(fontSize: 24)),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextPrompt(
-                  textController: TextEditingController(),
-                  onTap: () {
-                    print("Tapped");
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => ChatScreen()));
-                    // context
-                    //     .read<NavigationBloc>()
-                    //     .add(const NavigationEvent(index: 0));
-                    print("Tapped");
-                  },
-                ),
+              TextPrompt(
+                textController: TextEditingController(),
+                onTap: () {
+                  print("Tapped");
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ChatScreen()));
+
+                  print("Tapped");
+                },
               ),
               const SizedBox(height: 16),
               const DashboardCard(

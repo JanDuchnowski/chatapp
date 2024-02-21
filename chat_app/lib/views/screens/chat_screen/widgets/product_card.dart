@@ -17,7 +17,7 @@ class ProductRecommendationCard extends StatelessWidget {
                 : Border.all(color: Colors.grey.withOpacity(0.5)),
       ),
       padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(vertical: 4.0),
       height: 180,
       width: 100,
       child: Column(

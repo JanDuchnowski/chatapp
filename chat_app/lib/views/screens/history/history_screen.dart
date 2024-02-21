@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Search History')),
-        body: ListView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search History'),
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+      ),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 8),
+        child: ListView(
           children: [
             buildCard(
               'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
@@ -35,24 +40,37 @@ class HistoryScreen extends StatelessWidget {
     String subtitle,
   ) {
     return Card(
-      child: ListTile(
-        leading: Image.network(imageUrl),
-        title: Text(title),
-        subtitle: Text(subtitle),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
+      child: Container(
+        height: 200,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Row(
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.favorite,
+            Image.network(imageUrl),
+            Expanded(
+              child: ListTile(
+                title: Text(title),
+                subtitle: Text(subtitle),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.favorite,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.ios_share,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
               ),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.ios_share,
-              ),
-              onPressed: () {},
             ),
           ],
         ),

@@ -61,6 +61,17 @@ class AppTheme {
     ),
   );
   static final lightTheme = AppTheme.darkTheme.copyWith(
+    sliderTheme: const SliderThemeData(
+      activeTrackColor: Color(0xFF97E14A),
+      inactiveTrackColor: Color(0xFFE0E0E0),
+      thumbColor: Color(0xFF97E14A),
+      overlayColor: Color(0x2997E14A),
+      valueIndicatorColor: Color(0xFF97E14A),
+      showValueIndicator: ShowValueIndicator.always,
+      valueIndicatorTextStyle: TextStyle(
+        color: Colors.black,
+      ),
+    ),
     cardTheme: CardTheme(
       color: const Color.fromRGBO(242, 242, 242, 1),
       elevation: 0,

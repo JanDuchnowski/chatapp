@@ -17,13 +17,12 @@ class TextPrompt extends StatelessWidget {
         border: Border.all(color: Colors.black),
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Row(
           children: <Widget>[
             Flexible(
               child: TextField(
                 focusNode: FocusNode(),
-                //readOnly: true,
                 onTap: onTap != null ? () => onTap : null,
                 controller: textController,
                 onSubmitted: (text) {},
