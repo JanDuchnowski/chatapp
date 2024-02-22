@@ -2,15 +2,21 @@ import 'package:chat_app/bloc/authentication/authentication_bloc.dart';
 import 'package:chat_app/bloc/bloc_observer.dart';
 import 'package:chat_app/bloc/chat/chat_bloc.dart';
 import 'package:chat_app/bloc/theme/theme_bloc.dart';
+import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/interfaces/chat_interface.dart';
 import 'package:chat_app/repositories/chat_repository.dart';
 import 'package:chat_app/views/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/navigation/navigation_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final ChatInterface chatInterface = ChatRepository();
   runApp(
     MultiBlocProvider(
@@ -22,7 +28,8 @@ void main() {
         BlocProvider(
           create: (context) => AuthenticationBloc(),
         ),
-        BlocProvider(create: (context) => ThemeBloc()..add(CheckThemeEvent())),
+        BlocProvider(
+            create: (context) => ThemeBloc()..add(const CheckThemeEvent())),
       ],
       child: const ChatGPTPage(),
     ),
@@ -39,7 +46,7 @@ class ChatGPTPage extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp(
           theme: state.theme,
-          home: Scaffold(
+          home: const Scaffold(
             body: HomeScreen(),
           ),
         );
@@ -47,11 +54,3 @@ class ChatGPTPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-// ListView z poprzednimi wiadomościami na górze
-// SizedBox
-// Szybki opis + 5 wyników 

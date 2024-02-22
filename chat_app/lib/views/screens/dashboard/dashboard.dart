@@ -2,6 +2,8 @@ import 'package:chat_app/bloc/navigation/navigation_bloc.dart';
 import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/text_prompt.dart';
 import 'package:chat_app/views/screens/dashboard/dashboard_card.dart';
+import 'package:chat_app/views/screens/favorites/favorites_screen.dart';
+import 'package:chat_app/views/screens/history/history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,11 +34,16 @@ class DashboardScreen extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16),
-              const DashboardCard(
-                  title: "Last searches", items: ["Item 1", "Item 2"]),
+              SizedBox(
+                  // height: 200,
+                  child: SingleChildScrollView(
+                      child: SizedBox(height: 300, child: HistoryScreen()))),
               const SizedBox(height: 16),
-              const DashboardCard(
-                  title: "Favourites", items: ["Item 1", "Item 2"]),
+              SizedBox(
+                  // height: 200,
+                  child: SingleChildScrollView(
+                      child: SizedBox(
+                          height: 300, child: const FavoritesScreen()))),
             ],
           ),
         ),
