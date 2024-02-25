@@ -12,9 +12,10 @@ class TextPrompt extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 48,
+      // margin: const EdgeInsets.symmetric(horizontal: 18),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.black),
       ),
       child: Container(

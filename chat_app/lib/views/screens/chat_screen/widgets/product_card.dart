@@ -1,4 +1,7 @@
 import 'package:chat_app/models/product.dart';
+import 'package:chat_app/utils/build_context_data.dart';
+import 'package:chat_app/views/screens/chat_screen/widgets/price_container.dart';
+import 'package:chat_app/views/screens/dashboard/dashboard_card.dart';
 import 'package:flutter/material.dart';
 
 class ProductRecommendationCard extends StatelessWidget {
@@ -6,6 +9,7 @@ class ProductRecommendationCard extends StatelessWidget {
   final Product product;
   @override
   Widget build(BuildContext context) {
+    final BuildContextData ctxData = BuildContextData(context);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -22,28 +26,19 @@ class ProductRecommendationCard extends StatelessWidget {
       width: 100,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Spacer(
-                flex: 2,
+              Text(
+                product.name,
+                style: ctxData.textTheme.bodyLarge,
               ),
-              if (product.bestFor == "Category 3" ||
-                  product.description == "Product 5 description")
-                Text(
-                  product.bestFor == "Category 3"
-                      ? "Best seller"
-                      : product.description == "Product 5 description"
-                          ? "Best price"
-                          : "",
-                  style: TextStyle(
-                      color: product.bestFor == "Category 3"
-                          ? Colors.redAccent
-                          : Colors.greenAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
+              SizedBox(
+                width: 8,
+              ),
+              PriceContainer(title: product.price.toString()),
               const Spacer(),
               GestureDetector(
                 onTap: () {},
@@ -81,10 +76,6 @@ class ProductRecommendationCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(product.description),
-                            Text(product.price.toString()),
-                            Text(
-                              product.bestFor.toString(),
-                            ),
                           ]),
                     ),
                   ),

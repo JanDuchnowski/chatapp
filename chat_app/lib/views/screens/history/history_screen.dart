@@ -1,32 +1,39 @@
+import 'package:chat_app/utils/build_context_data.dart';
+import 'package:chat_app/views/screens/history/widgets/tripple_price_widget.dart';
 import 'package:flutter/material.dart';
 
 class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final BuildContextData ctxData = BuildContextData(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search History'),
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),
+      backgroundColor: Colors.grey.withOpacity(0.1),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
           children: [
             buildCard(
               'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
               'Motor for traveling',
               'Powerful motor for long-distance travel',
+              ctxData,
             ),
             buildCard(
               'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
               'Snowboard for beginners',
               'Perfect for learning snowboarding',
+              ctxData,
             ),
             buildCard(
               'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
               'Snowboard for beginners',
               'Perfect for learning snowboarding',
+              ctxData,
             ),
           ],
         ),
@@ -38,39 +45,45 @@ class HistoryScreen extends StatelessWidget {
     String imageUrl,
     String title,
     String subtitle,
+    BuildContextData ctxData,
   ) {
     return Card(
+      color: Colors.white,
       child: Container(
         height: 200,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.all(8),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(imageUrl),
-            Expanded(
-              child: ListTile(
-                title: Text(title),
-                subtitle: Text(subtitle),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.favorite,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.ios_share,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: ctxData.textTheme.displayLarge!
+                      .copyWith(fontWeight: FontWeight.normal),
                 ),
-              ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(
+                    Icons.favorite_outline,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.ios_share,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            const Text("[Last bot answer]"),
+            Spacer(),
+            TripplePriceWidget(
+              priceList: [100, 200, 300],
             ),
           ],
         ),

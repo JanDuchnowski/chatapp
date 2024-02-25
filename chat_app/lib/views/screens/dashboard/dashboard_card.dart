@@ -1,45 +1,50 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class DashboardCard extends StatelessWidget {
-  const DashboardCard({Key? key, required this.title, required this.items})
-      : super(key: key);
+  const DashboardCard({
+    super.key,
+    required this.title,
+    this.isAnimated = false,
+    this.isDarkMode = false,
+  });
 
   final String title;
-  final List<String> items;
+  final bool isAnimated;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(
-          color: Colors.grey,
-          width: 1,
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: isDarkMode ? Color.fromRGBO(80, 80, 80, 1) : Colors.white,
+        border: Border.all(color: const Color.fromRGBO(80, 80, 80, 1)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-          ListView.builder(
-              padding: EdgeInsets.all(8),
-              shrinkWrap: true,
-              itemCount: 2,
-              itemBuilder: (BuildContext context, int index) {
-                return Text(
-                  'Item $index',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                );
-              }),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(left: 18.0, top: 8, bottom: 8),
+        child: isAnimated
+            ? AnimatedTextKit(
+                pause: const Duration(milliseconds: 500),
+                isRepeatingAnimation: false,
+                animatedTexts: [
+                  TyperAnimatedText(title,
+                      textStyle: TextStyle(
+                        fontSize: 16,
+                        color: isDarkMode
+                            ? Colors.white
+                            : const Color.fromRGBO(80, 80, 80, 1),
+                      ))
+                ],
+              )
+            : Text(
+                title,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: isDarkMode
+                          ? Colors.white
+                          : const Color.fromRGBO(80, 80, 80, 1),
+                    ),
+              ),
       ),
     );
   }

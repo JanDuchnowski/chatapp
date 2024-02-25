@@ -7,6 +7,7 @@ import 'package:chat_app/views/screens/chat_screen/widgets/chat_message.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/product_card.dart';
 import 'package:chat_app/utils/build_context_data.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/text_prompt.dart';
+import 'package:chat_app/views/screens/dashboard/dashboard_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -39,38 +40,45 @@ class _ChatScreenState extends State<ChatScreen> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
-              foregroundColor: Colors.transparent,
-              toolbarOpacity: 0.0,
-              bottomOpacity: 0.0,
-              toolbarHeight: kIsWeb ? 120 : 90,
-              flexibleSpace: Container(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.white,
-                  child: RangeSlider(
-                    activeColor: Colors.black,
-                    divisions: 10,
-                    values: RangeValues(_minRangeValue, _maxRangeValue),
-                    onChanged: (value) {
-                      setState(() {
-                        _minRangeValue = value.start;
-                        _maxRangeValue = value.end;
-                      });
-                    },
-                    min: 0,
-                    max: 100,
-                    labels: RangeLabels(
-                      _minRangeValue.toString(),
-                      _maxRangeValue.toString(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // appBar: AppBar(
+            //   centerTitle: true,
+            //   backgroundColor: Colors.transparent,
+            //   surfaceTintColor: Colors.transparent,
+            //   foregroundColor: Colors.transparent,
+            //   toolbarOpacity: 0.0,
+            //   bottomOpacity: 0.0,
+            //   toolbarHeight: kIsWeb ? 120 : 90,
+            //   title: Padding(
+            //     padding: const EdgeInsets.only(bottom: 32.0),
+            //     child: Text(
+            //       "Choose price range",
+            //       style: ctxData.textTheme.bodyLarge,
+            //     ),
+            //   ),
+            //   flexibleSpace: Container(
+            //     alignment: Alignment.bottomCenter,
+            //     child: Container(
+            //       color: Colors.white,
+            //       child: RangeSlider(
+            //         activeColor: Colors.black,
+            //         divisions: 10,
+            //         values: RangeValues(_minRangeValue, _maxRangeValue),
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _minRangeValue = value.start;
+            //             _maxRangeValue = value.end;
+            //           });
+            //         },
+            //         min: 0,
+            //         max: 100,
+            //         labels: RangeLabels(
+            //           _minRangeValue.toString(),
+            //           _maxRangeValue.toString(),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             bottomNavigationBar: state.messageHistory.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.only(
@@ -112,9 +120,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
-                                        return ChatMessage(
-                                          text: state.messageHistory[index],
-                                          index: index,
+                                        return DashboardCard(
+                                          title: state.messageHistory[index],
                                         );
                                       },
                                       itemCount: state.messageHistory.length,
@@ -124,25 +131,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                     Column(
                                       children: [
                                         if (state.messageHistory.isNotEmpty)
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            width: double.maxFinite,
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .cardTheme
-                                                    .color,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            child: AnimatedTextKit(
-                                              pause: const Duration(
-                                                  milliseconds: 500),
-                                              isRepeatingAnimation: false,
-                                              animatedTexts: [
-                                                TyperAnimatedText(state.answer,
-                                                    textStyle: const TextStyle(
-                                                        fontSize: 16))
-                                              ],
-                                            ),
+                                          DashboardCard(
+                                            title: state.answer,
+                                            isAnimated: true,
+                                            isDarkMode: true,
                                           ),
                                         if (state.messageHistory.isEmpty)
                                           const Text(

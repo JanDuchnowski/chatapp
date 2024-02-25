@@ -14,6 +14,7 @@ class ChatService {
 
 Map<String, dynamic> products = {
   'product1': {
+    'name': 'Product 1',
     'image':
         'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
     'description': 'Product 1 description',
@@ -21,6 +22,7 @@ Map<String, dynamic> products = {
     'best_for': 'Category 1',
   },
   'product2': {
+    'name': 'Product 2',
     'image':
         'https://m.media-amazon.com/images/I/41O-kuT4riL._AC_SR400,600_AGcontrast_.jpg',
     'description': 'Product 2 description',
@@ -28,6 +30,7 @@ Map<String, dynamic> products = {
     'best_for': 'Category 2',
   },
   'product3': {
+    'name': 'Product 3',
     'image':
         'https://m.media-amazon.com/images/I/41LHHE-OneL._AC_SR400,600_AGcontrast_.jpg',
     'description': 'Product 3 description',
@@ -35,6 +38,7 @@ Map<String, dynamic> products = {
     'best_for': 'Category 1',
   },
   'product4': {
+    'name': 'Product 4',
     'image':
         'https://m.media-amazon.com/images/I/41sZtjTYn3L._AC_SR400,600_AGcontrast_.jpg',
     'description': 'Product 4 description',
@@ -42,6 +46,7 @@ Map<String, dynamic> products = {
     'best_for': 'Category 3',
   },
   'product5': {
+    'name': 'Product 5',
     'image':
         'https://m.media-amazon.com/images/I/310ErDAendL._AC_SR400,600_AGcontrast_.jpg',
     'description': 'Product 5 description',
