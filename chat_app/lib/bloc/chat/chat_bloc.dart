@@ -26,10 +26,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           productList.add(Product.fromJson(element));
         }
         final String answer = response['recommendation'];
-
+        final List<String> answerHistory = state.answerHistory + [answer];
         emit(state.copyWith(
           messageHistory: messageHistory,
-          answer: answer,
+          answerHistory: answerHistory,
           status: ChatStateStatus.fetched,
           productList: productList,
         ));
@@ -60,9 +60,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         }
         final String answer = response['recommendation'];
 
+        state.answerHistory.removeAt(state.answerHistory.length - 1);
+
         emit(state.copyWith(
             messageHistory: szyc,
-            answer: answer,
+            answerHistory: state.answerHistory,
             status: ChatStateStatus.fetched,
             productList: productList));
       },

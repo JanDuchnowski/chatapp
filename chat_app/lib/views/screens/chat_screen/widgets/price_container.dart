@@ -19,7 +19,7 @@ class PriceContainer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Center(
           child: Text(
-            title,
+            "\$ $title",
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
           ),
         ),

@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TextPrompt extends StatelessWidget {
-  const TextPrompt({super.key, required this.textController, this.onTap});
+  const TextPrompt(
+      {super.key,
+      required this.textController,
+      this.onTap,
+      this.enabled = true});
 
   final TextEditingController textController;
   final Function? onTap;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,8 @@ class TextPrompt extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: TextField(
+                enabled: enabled,
+                readOnly: enabled ? false : true,
                 focusNode: FocusNode(),
                 onTap: onTap != null ? () => onTap : null,
                 controller: textController,

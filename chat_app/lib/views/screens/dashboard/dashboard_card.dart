@@ -7,15 +7,20 @@ class DashboardCard extends StatelessWidget {
     required this.title,
     this.isAnimated = false,
     this.isDarkMode = false,
+    this.fullScreenWidth,
+    this.onFinished,
   });
 
   final String title;
   final bool isAnimated;
   final bool isDarkMode;
+  final bool? fullScreenWidth;
+  final Function? onFinished;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: fullScreenWidth != null ? MediaQuery.of(context).size.width : null,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: isDarkMode ? Color.fromRGBO(80, 80, 80, 1) : Colors.white,
@@ -27,6 +32,11 @@ class DashboardCard extends StatelessWidget {
             ? AnimatedTextKit(
                 pause: const Duration(milliseconds: 500),
                 isRepeatingAnimation: false,
+                onFinished: onFinished != null
+                    ? () {
+                        onFinished!();
+                      }
+                    : null,
                 animatedTexts: [
                   TyperAnimatedText(title,
                       textStyle: TextStyle(

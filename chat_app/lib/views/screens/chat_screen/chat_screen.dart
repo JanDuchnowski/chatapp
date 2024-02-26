@@ -7,6 +7,7 @@ import 'package:chat_app/views/screens/chat_screen/widgets/chat_message.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/product_card.dart';
 import 'package:chat_app/utils/build_context_data.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/text_prompt.dart';
+import 'package:chat_app/views/screens/conversation/screens/conversation_screen.dart';
 import 'package:chat_app/views/screens/dashboard/dashboard_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +24,13 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController textController = TextEditingController();
   double _minRangeValue = 40;
   double _maxRangeValue = 80;
+  bool answerDisplayed = false;
+
+  void onFinished() {
+    setState(() {
+      answerDisplayed = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +91,19 @@ class _ChatScreenState extends State<ChatScreen> {
                 ? Padding(
                     padding: const EdgeInsets.only(
                         left: 8.0, right: 8, bottom: kIsWeb ? 110 : 70),
-                    child: TextPrompt(textController: textController),
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Tapped bottom prompt");
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => ConversationScreen()),
+                        );
+                      },
+                      child: TextPrompt(
+                        textController: textController,
+                        enabled: false,
+                      ),
+                    ),
                   )
                 : null,
             body: SafeArea(
@@ -132,9 +152,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                       children: [
                                         if (state.messageHistory.isNotEmpty)
                                           DashboardCard(
-                                            title: state.answer,
+                                            title: state.answerHistory.last,
                                             isAnimated: true,
                                             isDarkMode: true,
+                                            fullScreenWidth: true,
+                                            onFinished: onFinished,
                                           ),
                                         if (state.messageHistory.isEmpty)
                                           const Text(
@@ -220,8 +242,21 @@ class _ChatScreenState extends State<ChatScreen> {
                                     letterSpacing: 0,
                                   ),
                                 ),
-                                TextPrompt(
-                                  textController: textController,
+                                GestureDetector(
+                                  onTap: answerDisplayed
+                                      ? () {
+                                          print("Tapped bottom prompt");
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ConversationScreen()),
+                                          );
+                                        }
+                                      : null,
+                                  child: TextPrompt(
+                                    textController: textController,
+                                    enabled: !answerDisplayed,
+                                  ),
                                 ),
                               ],
                             ),
