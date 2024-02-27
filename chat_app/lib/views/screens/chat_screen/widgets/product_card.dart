@@ -14,11 +14,7 @@ class ProductRecommendationCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
-        border: product.bestFor == "Category 3"
-            ? Border.all(color: Colors.red)
-            : product.description == "Product 5 description"
-                ? Border.all(color: Colors.greenAccent)
-                : Border.all(color: Colors.grey.withOpacity(0.5)),
+        border: Border.all(color: Colors.grey.withOpacity(0.5)),
       ),
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 4.0),

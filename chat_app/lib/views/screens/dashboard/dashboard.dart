@@ -1,5 +1,6 @@
 import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/text_prompt.dart';
+import 'package:chat_app/views/screens/conversation/screens/conversation_screen.dart';
 import 'package:chat_app/views/screens/dashboard/dashboard_card.dart';
 import 'package:flutter/material.dart';
 
@@ -30,71 +31,80 @@ class DashboardScreen extends StatelessWidget {
                       textController: TextEditingController(),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ChatScreen()));
+                            builder: (context) => ConversationScreen()));
                       },
                     ),
                   ],
                 ),
               ),
             ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              color: Colors.white,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                height: 300,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Favorites", style: TextStyle(fontSize: 24)),
-                    SizedBox(
-                      height: 250,
-                      child: ListView.separated(
-                        padding: const EdgeInsets.all(0),
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 8,
-                        ),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return DashboardCard(title: 'Item $index');
-                        },
-                        itemCount: 8,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0.0),
+                    ),
+                    color: Colors.white,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      //height: 300,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Favorites",
+                              style: TextStyle(fontSize: 24)),
+                          SizedBox(
+                            height: 250,
+                            child: ListView.separated(
+                              padding: const EdgeInsets.all(0),
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                height: 8,
+                              ),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return DashboardCard(title: 'Item $index');
+                              },
+                              itemCount: 8,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              color: Colors.white,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                height: 300,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("History", style: TextStyle(fontSize: 24)),
-                    SizedBox(
-                      height: 250,
-                      child: ListView.separated(
-                        padding: const EdgeInsets.all(0),
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 8,
-                        ),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return DashboardCard(title: 'Item $index');
-                        },
-                        itemCount: 8,
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0.0),
+                    ),
+                    color: Colors.white,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      // height: 300,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("History", style: TextStyle(fontSize: 24)),
+                          SizedBox(
+                            height: 250,
+                            child: ListView.separated(
+                              padding: const EdgeInsets.all(0),
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                height: 8,
+                              ),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return DashboardCard(title: 'Item $index');
+                              },
+                              itemCount: 8,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

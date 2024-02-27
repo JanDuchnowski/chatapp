@@ -61,14 +61,14 @@ class AppTheme {
     ),
   );
   static final lightTheme = AppTheme.darkTheme.copyWith(
-    sliderTheme: const SliderThemeData(
-      activeTrackColor: Color(0xFF97E14A),
-      inactiveTrackColor: Color(0xFFE0E0E0),
-      thumbColor: Color(0xFF97E14A),
-      overlayColor: Color(0x2997E14A),
-      valueIndicatorColor: Color(0xFF97E14A),
+    sliderTheme: SliderThemeData(
+      activeTrackColor: const Color.fromRGBO(80, 80, 80, 1).withOpacity(0.5),
+      inactiveTrackColor: const Color(0xFFE0E0E0),
+      thumbColor: const Color.fromRGBO(80, 80, 80, 1),
+      overlayColor: const Color(0x2997E14A),
+      valueIndicatorColor: const Color.fromRGBO(80, 80, 80, 1).withOpacity(0.5),
       showValueIndicator: ShowValueIndicator.always,
-      valueIndicatorTextStyle: TextStyle(
+      valueIndicatorTextStyle: const TextStyle(
         color: Colors.black,
       ),
     ),

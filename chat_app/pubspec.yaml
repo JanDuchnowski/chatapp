@@ -46,6 +46,7 @@ dependencies:
   # firebase_auth: ^4.17.2
   supabase_flutter: ^2.3.4
   flutter_chat_ui: ^1.6.12
+  syncfusion_flutter_sliders: ^24.2.7
   # js: ^0.6.7
 
 

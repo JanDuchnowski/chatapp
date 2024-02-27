@@ -22,6 +22,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     final BuildContextData ctxData = BuildContextData(context);
 
     return Container(
+      height: 50,
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         boxShadow: [

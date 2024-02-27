@@ -32,7 +32,7 @@ class TextPrompt extends StatelessWidget {
                 enabled: enabled,
                 readOnly: enabled ? false : true,
                 focusNode: FocusNode(),
-                onTap: onTap != null ? () => onTap : null,
+                onTap: (onTap != null && !enabled) ? () => onTap : null,
                 controller: textController,
                 onSubmitted: (text) {},
                 decoration: const InputDecoration.collapsed(

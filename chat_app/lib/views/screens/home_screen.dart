@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const DashboardScreen(),
     HistoryScreen(),
     ChatScreen(),
-    const FavoritesScreen(),
+    FavoritesScreen(),
     const AccountScreen(),
   ];
 

@@ -14,8 +14,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       (event, emit) async {
         final List<String> messageHistory =
             state.messageHistory + [event.message];
+
         emit(state.copyWith(
             messageHistory: messageHistory, status: ChatStateStatus.fetching));
+
+        await Future.delayed(const Duration(seconds: 1));
+
         final Map<String, dynamic> response =
             await chatInterface.handleNewMessage(event.message);
 

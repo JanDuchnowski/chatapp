@@ -22,13 +22,14 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController textController = TextEditingController();
-  double _minRangeValue = 40;
-  double _maxRangeValue = 80;
+
   bool answerDisplayed = false;
 
   void onFinished() {
-    setState(() {
-      answerDisplayed = true;
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      setState(() {
+        answerDisplayed = true;
+      });
     });
   }
 
@@ -92,16 +93,18 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.only(
                         left: 8.0, right: 8, bottom: kIsWeb ? 110 : 70),
                     child: GestureDetector(
-                      onTap: () {
-                        print("Tapped bottom prompt");
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => ConversationScreen()),
-                        );
-                      },
+                      onTap: answerDisplayed
+                          ? () {
+                              print("Tapped bottom prompt");
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => ConversationScreen()),
+                              );
+                            }
+                          : null,
                       child: TextPrompt(
                         textController: textController,
-                        enabled: false,
+                        enabled: !answerDisplayed,
                       ),
                     ),
                   )
@@ -135,7 +138,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       padding: const EdgeInsets.only(bottom: 8),
                                       separatorBuilder: (context, _) =>
                                           const SizedBox(
-                                        height: 0,
+                                        height: 10,
                                       ),
                                       physics:
                                           const NeverScrollableScrollPhysics(),
@@ -221,8 +224,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       ],
                                     ),
                                   if (state.status == ChatStateStatus.fetching)
-                                    const Center(
-                                        child: CircularProgressIndicator())
+                                    Center(child: Container())
                                 ],
                               ),
                             ),

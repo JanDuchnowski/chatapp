@@ -1,84 +1,121 @@
+import 'package:chat_app/views/screens/history/widgets/tripple_price_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-class CustomBarWidget extends StatelessWidget {
+class CustomBarWidget extends StatefulWidget implements PreferredSizeWidget {
+  CustomBarWidget(
+      {super.key, this.height = kToolbarHeight, required this.title});
+
+  final double height;
+
+  final String title;
+
+  @override
+  State<CustomBarWidget> createState() => _CustomBarWidgetState();
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(120);
+}
+
+class _CustomBarWidgetState extends State<CustomBarWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  SfRangeValues _values = SfRangeValues(40.0, 80.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: SizedBox(
-        height: 160.0,
-        child: Stack(
+      body: Container(
+        color: Colors.grey.withOpacity(0.1),
+        width: MediaQuery.of(context).size.width,
+        height: 120.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              color: Colors.red,
-              width: MediaQuery.of(context).size.width,
-              height: 100.0,
-              child: const Center(
-                child: Text(
-                  "Home",
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 80.0,
-              left: 0.0,
-              right: 0.0,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1.0),
-                      border: Border.all(
-                          color: Colors.grey.withOpacity(0.5), width: 1.0),
-                      color: Colors.white),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: SizedBox(
+                  height: 30,
                   child: Row(
                     children: [
                       IconButton(
-                        icon: const Icon(
-                          Icons.menu,
-                          color: Colors.red,
-                        ),
+                        padding: const EdgeInsets.only(left: 20.0),
+                        icon: Icon(Icons.arrow_back_ios),
                         onPressed: () {
-                          print("your menu action here");
-                          _scaffoldKey.currentState?.openDrawer();
+                          Navigator.pop(context);
                         },
                       ),
-                      const Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Search",
-                          ),
-                        ),
+                      Spacer(),
+                      Text(
+                        widget.title,
+                        style: TextStyle(color: Colors.black, fontSize: 18.0),
                       ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.search,
-                          color: Colors.red,
-                        ),
-                        onPressed: () {
-                          print("your menu action here");
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.notifications,
-                          color: Colors.red,
-                        ),
-                        onPressed: () {
-                          print("your menu action here");
-                        },
-                      ),
+                      Spacer(),
                     ],
                   ),
                 ),
               ),
-            )
+            ),
+            Container(
+              padding: const EdgeInsets.only(right: 20.0, left: 20, bottom: 10),
+              child: SfRangeSlider(
+                activeColor: Colors.black,
+                inactiveColor: const Color.fromARGB(255, 171, 152, 152),
+                min: 0.0,
+                max: 100.0,
+                values: _values,
+                showLabels: true,
+                labelFormatterCallback:
+                    (dynamic actualValue, String formattedText) {
+                  return '\$ $formattedText';
+                },
+                interval: 10,
+                showTicks: true,
+                showDividers: true,
+                enableTooltip: false,
+                stepSize: 10,
+                minorTicksPerInterval: 1,
+                onChanged: (dynamic values) {
+                  setState(() {
+                    _values = values;
+                  });
+                },
+              ),
+              // RangeSlider(
+              //   activeColor: Colors.black,
+              //   inactiveColor: const Color.fromARGB(255, 171, 152, 152),
+              //   overlayColor: MaterialStatePropertyAll(Colors.black),
+              //   divisions: 10,
+              //   values: RangeValues(_minRangeValue, _maxRangeValue),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       _minRangeValue = value.start;
+              //       _maxRangeValue = value.end;
+              //     });
+              //   },
+              //   min: 0,
+              //   max: 100,
+              //   labels: RangeLabels(
+              //     _minRangeValue.toString(),
+              //     _maxRangeValue.toString(),
+              //   ),
+              // ),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+class CustomRangeSlider extends StatelessWidget {
+  const CustomRangeSlider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
