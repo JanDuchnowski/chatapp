@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                height: 100,
+                height: 70,
                 child: CustomNavigationBar(
                     currentlySelected: state.selectedIndex,
                     onTap: onItemTapped),
