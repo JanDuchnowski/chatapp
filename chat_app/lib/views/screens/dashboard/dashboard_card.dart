@@ -38,7 +38,7 @@ class _DashboardCardState extends State<DashboardCard> {
           : null,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: widget.isDarkMode ? Color.fromRGBO(80, 80, 80, 1) : Colors.white,
+        color: widget.isDarkMode ? const Color.fromRGBO(80, 80, 80, 1) : Colors.white,
         border: Border.all(color: const Color.fromRGBO(80, 80, 80, 1)),
       ),
       child: Padding(

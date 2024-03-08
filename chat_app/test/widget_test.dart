@@ -34,13 +34,11 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat_app/main.dart';
 import 'package:chat_app/bloc/authentication/authentication_bloc.dart';
 import 'package:chat_app/bloc/chat/chat_bloc.dart';
 import 'package:chat_app/bloc/navigation/navigation_bloc.dart';
 import 'package:chat_app/bloc/theme/theme_bloc.dart';
 import 'package:chat_app/interfaces/chat_interface.dart';
-import 'package:chat_app/repositories/chat_repository.dart';
 import 'package:chat_app/views/screens/home_screen.dart';
 import 'package:mockito/mockito.dart';
 
@@ -68,7 +66,7 @@ void main() {
     final materialApp = MaterialApp(
       home: BlocProvider(
         create: (context) => NavigationBloc(),
-        child: Scaffold(
+        child: const Scaffold(
           body: HomeScreen(),
         ),
       ),

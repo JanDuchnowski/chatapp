@@ -1,9 +1,8 @@
-import 'package:chat_app/views/screens/history/widgets/tripple_price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class CustomBarWidget extends StatefulWidget implements PreferredSizeWidget {
-  CustomBarWidget(
+  const CustomBarWidget(
       {super.key, this.height = kToolbarHeight, required this.title});
 
   final double height;
@@ -15,13 +14,13 @@ class CustomBarWidget extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(120);
 }
 
 class _CustomBarWidgetState extends State<CustomBarWidget> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
-  SfRangeValues _values = SfRangeValues(40.0, 80.0);
+  SfRangeValues _values = const SfRangeValues(40.0, 80.0);
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +42,17 @@ class _CustomBarWidgetState extends State<CustomBarWidget> {
                     children: [
                       IconButton(
                         padding: const EdgeInsets.only(left: 20.0),
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: const Icon(Icons.arrow_back_ios),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                         widget.title,
-                        style: TextStyle(color: Colors.black, fontSize: 18.0),
+                        style: const TextStyle(color: Colors.black, fontSize: 18.0),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),

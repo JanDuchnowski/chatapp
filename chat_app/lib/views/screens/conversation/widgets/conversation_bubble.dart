@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chat_app/bloc/chat/chat_bloc.dart';
-import 'package:chat_app/views/screens/conversation/widgets/loading_jumping_dots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +36,7 @@ class ConversationBubble extends StatelessWidget {
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: isDarkMode ? Color.fromRGBO(80, 80, 80, 1) : Colors.white,
+            color: isDarkMode ? const Color.fromRGBO(80, 80, 80, 1) : Colors.white,
             border: Border.all(color: const Color.fromRGBO(80, 80, 80, 1)),
           ),
           child: isAnimated

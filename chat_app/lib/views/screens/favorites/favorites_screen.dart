@@ -3,6 +3,8 @@ import 'package:chat_app/views/screens/history/widgets/tripple_price_widget.dart
 import 'package:flutter/material.dart';
 
 class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final BuildContextData ctxData = BuildContextData(context);
@@ -81,10 +83,8 @@ class FavoritesScreen extends StatelessWidget {
               ],
             ),
             const Text("[Last bot answer]"),
-            Spacer(),
-            TripplePriceWidget(
-              priceList: [100, 200, 300],
-            ),
+            const Spacer(),
+            const TripplePriceWidget(),
           ],
         ),
       ),

@@ -5,8 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChatMessage extends StatefulWidget {
   String text;
   final int index;
-  ChatMessage({Key? key, required this.text, required this.index})
-      : super(key: key);
+  ChatMessage({super.key, required this.text, required this.index});
 
   @override
   _ChatMessageState createState() => _ChatMessageState();

@@ -19,27 +19,27 @@ class _LoadingJumpingDotsState extends State<LoadingJumpingDots>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     )..repeat(reverse: true);
 
     _dotOneAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Interval(0, 0.3, curve: Curves.easeInOut),
+        curve: const Interval(0, 0.3, curve: Curves.easeInOut),
       ),
     );
 
     _dotTwoAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Interval(0.3, 0.6, curve: Curves.easeInOut),
+        curve: const Interval(0.3, 0.6, curve: Curves.easeInOut),
       ),
     );
 
     _dotThreeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Interval(0.6, 1, curve: Curves.easeInOut),
+        curve: const Interval(0.6, 1, curve: Curves.easeInOut),
       ),
     );
   }
@@ -63,8 +63,8 @@ class _LoadingJumpingDotsState extends State<LoadingJumpingDots>
               child: Container(
                 width: 10,
                 height: 10,
-                margin: EdgeInsets.symmetric(horizontal: 2),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.symmetric(horizontal: 2),
+                decoration: const BoxDecoration(
                   color: Colors.grey,
                   shape: BoxShape.circle,
                 ),
@@ -80,8 +80,8 @@ class _LoadingJumpingDotsState extends State<LoadingJumpingDots>
               child: Container(
                 width: 10,
                 height: 10,
-                margin: EdgeInsets.symmetric(horizontal: 2),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.symmetric(horizontal: 2),
+                decoration: const BoxDecoration(
                   color: Colors.grey,
                   shape: BoxShape.circle,
                 ),
@@ -97,8 +97,8 @@ class _LoadingJumpingDotsState extends State<LoadingJumpingDots>
               child: Container(
                 width: 10,
                 height: 10,
-                margin: EdgeInsets.symmetric(horizontal: 2),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.symmetric(horizontal: 2),
+                decoration: const BoxDecoration(
                   color: Colors.grey,
                   shape: BoxShape.circle,
                 ),

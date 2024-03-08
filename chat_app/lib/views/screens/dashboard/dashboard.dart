@@ -1,4 +1,3 @@
-import 'package:chat_app/views/screens/chat_screen/chat_screen.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/text_prompt.dart';
 import 'package:chat_app/views/screens/conversation/screens/conversation_screen.dart';
 import 'package:chat_app/views/screens/dashboard/dashboard_card.dart';
@@ -29,12 +28,12 @@ class DashboardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text('Hello User!', style: TextStyle(fontSize: 24)),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextPrompt(
                         textController: TextEditingController(),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ConversationScreen()));
+                              builder: (context) => const ConversationScreen()));
                         },
                       ),
                     ],

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,9 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   };
   final List<Widget> _widgetOptions = <Widget>[
     const DashboardScreen(),
-    HistoryScreen(),
-    ChatScreen(),
-    FavoritesScreen(),
+    const HistoryScreen(),
+    const ChatScreen(),
+    const FavoritesScreen(),
     const AccountScreen(),
   ];
 
