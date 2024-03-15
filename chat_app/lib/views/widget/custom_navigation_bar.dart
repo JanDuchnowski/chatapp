@@ -25,7 +25,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         Navigator.of(context).pop();
       },
       child: Container(
-        // height: 50,
+        height: 100,
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           boxShadow: [

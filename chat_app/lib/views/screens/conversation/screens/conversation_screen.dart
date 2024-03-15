@@ -33,52 +33,74 @@ class _ConversationScreenState extends State<ConversationScreen> {
             answerHistory = state.answerHistory;
           }
 
-          return Scaffold(
-            appBar: const CustomBarWidget(
-              title: "Gaming Laptop",
-            ),
-            body: SingleChildScrollView(
-              child: (state.messageHistory.isNotEmpty)
-                  ? Column(
-                      children: [
-                        for (int i = 0;
-                            i < messageHistory.length ||
-                                i < answerHistory.length;
-                            i++)
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: ConversationBubble(
-                                    title: messageHistory.length > i
-                                        ? messageHistory[i]
-                                        : '',
+          return SafeArea(
+            child: Scaffold(
+              appBar: const CustomBarWidget(
+                title: "Gaming Laptop",
+              ),
+              body: SingleChildScrollView(
+                child: (state.messageHistory.isNotEmpty)
+                    ? Column(
+                        children: [
+                          for (int i = 0;
+                              i < messageHistory.length ||
+                                  i < answerHistory.length;
+                              i++)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: ConversationBubble(
+                                      title: messageHistory.length > i
+                                          ? messageHistory[i]
+                                          : '',
+                                    ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: ConversationBubble(
-                                    title: answerHistory.length > i
-                                        ? answerHistory[i]
-                                        : '',
-                                    isDarkMode: true,
-                                    isLastAnswer: answerHistory.last ==
-                                        (answerHistory.length > i
-                                            ? answerHistory[i]
-                                            : ''),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: ConversationBubble(
+                                      title: answerHistory.length > i
+                                          ? answerHistory[i]
+                                          : '',
+                                      isDarkMode: true,
+                                      isLastAnswer: answerHistory.last ==
+                                          (answerHistory.length > i
+                                              ? answerHistory[i]
+                                              : ''),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        (state.status == ChatStateStatus.fetched &&
-                                state.productList.isNotEmpty)
-                            ? LayoutBuilder(builder: (context, constraints) {
-                                //if (MediaQuery.of(context).size.width < 600) {
-                                return Expanded(
-                                  child: GridView.builder(
+                          (state.status == ChatStateStatus.fetched &&
+                                  state.productList.isNotEmpty)
+                              ? LayoutBuilder(builder: (context, constraints) {
+                                  if (MediaQuery.of(context).size.width > 600) {
+                                    return Expanded(
+                                      child: GridView.builder(
+                                        shrinkWrap: true,
+                                        padding: EdgeInsets.zero,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return ProductRecommendationCard(
+                                            product: state.productList[index],
+                                          );
+                                        },
+                                        itemCount: state.productList.length,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          crossAxisSpacing: 8,
+                                          mainAxisSpacing: 8,
+                                          childAspectRatio: 1.7,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return ListView.builder(
                                     shrinkWrap: true,
                                     padding: EdgeInsets.zero,
                                     physics:
@@ -89,30 +111,23 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                       );
                                     },
                                     itemCount: state.productList.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      crossAxisSpacing: 8,
-                                      mainAxisSpacing: 8,
-                                      childAspectRatio: 1.7,
-                                    ),
+                                  );
+                                })
+                              : const Center(
+                                  child: CircularProgressIndicator(
+                                    color: CupertinoColors.activeBlue,
                                   ),
-                                );
-                              })
-                            : const Center(
-                                child: CircularProgressIndicator(
-                                  color: CupertinoColors.activeBlue,
                                 ),
-                              ),
-                      ],
-                    )
-                  : Container(),
-            ),
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.only(
-                  left: 8.0, right: 8, bottom: kIsWeb ? 80 : 70),
-              child: TextPrompt(
-                textController: textController,
+                        ],
+                      )
+                    : Container(),
+              ),
+              bottomNavigationBar: Padding(
+                padding:
+                    const EdgeInsets.only(left: 8.0, right: 8, bottom: 100),
+                child: TextPrompt(
+                  textController: textController,
+                ),
               ),
             ),
           );

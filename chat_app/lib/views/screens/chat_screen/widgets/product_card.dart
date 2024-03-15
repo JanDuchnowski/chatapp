@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/models/product.dart';
 import 'package:chat_app/utils/build_context_data.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/price_container.dart';
@@ -86,9 +87,23 @@ class ProductRecommendationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: Image.network(
-                        product.image,
-                        fit: BoxFit.cover,
+                      child: CachedNetworkImage(
+                        //  image: NetworkImage(
+                        imageUrl: product.image,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.red, BlendMode.colorBurn)),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        //      fit: BoxFit.cover,
+//),
                       ),
                     ),
                     Expanded(

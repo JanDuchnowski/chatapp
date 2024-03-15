@@ -44,9 +44,9 @@ dependencies:
   # firebase_core_platform_interface: ^5.0.0
   # cloud_firestore: ^4.15.2
   # firebase_auth: ^4.17.2
-  supabase_flutter: ^2.3.4
-  flutter_chat_ui: ^1.6.12
   syncfusion_flutter_sliders: ^24.2.7
+  cached_network_image: ^3.3.1
+  url_launcher: ^6.2.5
   # js: ^0.6.7
 
 

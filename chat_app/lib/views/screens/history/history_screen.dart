@@ -92,7 +92,7 @@ class HistoryScreen extends StatelessWidget {
             const Spacer(),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   child: Row(
                     children: [
                       Text("Price:"),
@@ -100,11 +100,11 @@ class HistoryScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Spacer(),
+                if (ctxData.screenWidth > 500) const Spacer(),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: SizedBox(
-                    width: ctxData.screenWidth * 0.2,
+                    width: ctxData.screenWidth * 0.4 - 8,
                     height: 100,
                     child: Container(
                       padding: const EdgeInsets.all(8),
