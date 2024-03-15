@@ -88,6 +88,6 @@ class _ChatScreenState extends State<ChatScreen> {
               )
             : ConversationScreen();
       },
-    );
+    ); //szyc
   }
 }
