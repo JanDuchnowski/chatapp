@@ -40,17 +40,18 @@ class _CustomBarWidgetState extends State<CustomBarWidget> {
                   height: 30,
                   child: Row(
                     children: [
-                      IconButton(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                      // IconButton(
+                      //   padding: const EdgeInsets.only(left: 20.0),
+                      //   icon: const Icon(Icons.arrow_back_ios),
+                      //   onPressed: () {
+                      //     Navigator.pop(context);
+                      //   },
+                      // ),
                       const Spacer(),
                       Text(
                         widget.title,
-                        style: const TextStyle(color: Colors.black, fontSize: 18.0),
+                        style: const TextStyle(
+                            color: Colors.black, fontSize: 18.0),
                       ),
                       const Spacer(),
                     ],

@@ -9,36 +9,38 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BuildContextData ctxData = BuildContextData(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search History'),
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent,
-      ),
-      backgroundColor: Colors.grey.withOpacity(0.1),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8),
-        child: ListView(
-          children: [
-            buildCard(
-              'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
-              'Motor for traveling',
-              'Powerful motor for long-distance travel',
-              ctxData,
-            ),
-            buildCard(
-              'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
-              'Snowboard for beginners',
-              'Perfect for learning snowboarding',
-              ctxData,
-            ),
-            buildCard(
-              'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
-              'Snowboard for beginners',
-              'Perfect for learning snowboarding',
-              ctxData,
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Search History'),
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+        ),
+        backgroundColor: Colors.grey.withOpacity(0.1),
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          child: ListView(
+            children: [
+              buildCard(
+                'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
+                'Motor for traveling',
+                'Powerful motor for long-distance travel',
+                ctxData,
+              ),
+              buildCard(
+                'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
+                'Snowboard for beginners',
+                'Perfect for learning snowboarding',
+                ctxData,
+              ),
+              buildCard(
+                'https://m.media-amazon.com/images/I/41EWnXeuMzL._AC_SR400,600_AGcontrast_.jpg',
+                'Snowboard for beginners',
+                'Perfect for learning snowboarding',
+                ctxData,
+              ),
+            ],
+          ),
         ),
       ),
     );

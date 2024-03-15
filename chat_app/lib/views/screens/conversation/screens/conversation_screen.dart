@@ -110,7 +110,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
             ),
             bottomNavigationBar: Padding(
               padding: const EdgeInsets.only(
-                  left: 8.0, right: 8, bottom: kIsWeb ? 110 : 70),
+                  left: 8.0, right: 8, bottom: kIsWeb ? 80 : 70),
               child: TextPrompt(
                 textController: textController,
               ),
