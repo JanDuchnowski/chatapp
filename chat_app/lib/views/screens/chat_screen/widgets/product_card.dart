@@ -4,6 +4,7 @@ import 'package:chat_app/utils/build_context_data.dart';
 import 'package:chat_app/views/screens/chat_screen/widgets/price_container.dart';
 import 'package:chat_app/views/screens/conversation/widgets/details_pop_up.dart';
 import 'package:flutter/material.dart';
+import 'package:image_network/image_network.dart';
 
 class ProductRecommendationCard extends StatelessWidget {
   const ProductRecommendationCard({super.key, required this.product});
@@ -87,24 +88,7 @@ class ProductRecommendationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: CachedNetworkImage(
-                        //  image: NetworkImage(
-                        imageUrl: product.image,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.red, BlendMode.colorBurn)),
-                          ),
-                        ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                        //      fit: BoxFit.cover,
-//),
-                      ),
+                      child: Image.asset("assets/images/laptop1.jpeg"),
                     ),
                     Expanded(
                       child: Padding(
