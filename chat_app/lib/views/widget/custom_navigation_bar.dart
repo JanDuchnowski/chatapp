@@ -22,7 +22,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
       },
       child: Container(
         height: 100,

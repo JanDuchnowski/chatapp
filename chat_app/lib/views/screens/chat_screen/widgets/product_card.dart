@@ -80,26 +80,22 @@ class ProductRecommendationCard extends StatelessWidget {
                 )
               ],
             ),
-            Expanded(
+            SizedBox(
+              height: 200,
               child: Container(
                 height: 150,
                 padding: const EdgeInsets.all(2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Image.asset("assets/images/laptop1.jpeg"),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(product.description),
-                            ]),
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(product.description),
+                          ]),
                     ),
                   ],
                 ),
